@@ -1,0 +1,88 @@
+plugins {
+    id 'java'
+    id 'maven-publish'  // Add Maven Publish Plugin
+}
+
+apply plugin: 'java'
+
+group 'de.firetail.compat.mulletrestclient'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'joda-time:joda-time:2.12.7'
+    implementation 'com.opencsv:opencsv:5.9'
+    implementation 'com.google.guava:guava:33.3.1-jre'
+    implementation 'edu.ucar:netcdf4:4.5.5'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // Sets Java 17
+    }
+}
+
+test {
+    useJUnitPlatform() {
+        excludeTags 'manual'
+    }
+}
+
+wrapper {
+    gradleVersion = '8.4'
+    // use distribution type ALL, for better IDE support
+    distributionType = org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
+}
+
+
+// Publish Configuration to GitHub Packages
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'de.firetail.compat'
+            artifactId = 'mullet-rest-client'
+            version = project.version
+
+            from components.java
+
+            pom {
+                name = 'Mullet REST Client'
+                description = 'A REST client for compatibility support.'
+                url = 'https://github.com/mcb77/mullet-rest-client'
+
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'mcb77'
+                        name = 'mcb77'
+                        email = 'mcb@schaeuffelhut-berger.de'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = uri("https://maven.pkg.github.com/mcb77/mullet-rest-client")
+
+            credentials {
+                username = findProperty("gpr.user") ?: System.getenv("USERNAME_GITHUB")
+                password = findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+.gradle
+.idea
+gradle.properties
+build
+*/build
+node_modules
+tmp
+*~
+.eslintcache
+/ChatClient/build_jar/
+/config/
+*.log
+work
