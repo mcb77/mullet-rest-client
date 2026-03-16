@@ -12,7 +12,7 @@ Named _mullet_ because Movebank is a bit dated — business in the front, party 
 
 **Gradle:**
 ```groovy
-implementation 'de.firetail:mullet-rest-client:0.0.1'
+implementation 'de.firetail:mullet-rest-client:0.0.2'
 ```
 
 **Maven:**
@@ -20,7 +20,7 @@ implementation 'de.firetail:mullet-rest-client:0.0.1'
 <dependency>
     <groupId>de.firetail</groupId>
     <artifactId>mullet-rest-client</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
