@@ -6,7 +6,7 @@ public class RequestBuilderEvent extends RequestBuilder {
 
 	public RequestBuilderEvent(String studyId, String sensorTypeId, List<String> attributes) {
 		super(Constants.Types.EVENT, studyId);
-		parameters.put(Constants.Attributes.SENSOR_SENSOR_TYPE_ID, sensorTypeId);
+		parameters.put(Constants.Attributes.SENSOR_TYPE_ID, sensorTypeId);
 		setSelectAttributes(attributes);
 	}
 
