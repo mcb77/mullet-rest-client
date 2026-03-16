@@ -1,6 +1,7 @@
+# mullet-rest-client
 ![proto-mullet.jpg](proto-mullet.jpg)
 
-# mullet-rest-client
+
 A Java client library for the [Movebank REST API (v1)](https://github.com/movebank/movebank-api-doc/blob/master/movebank-api.md).
 
 Named _mullet_ because Movebank is a bit dated — business in the front, party animal tracking in the back.
