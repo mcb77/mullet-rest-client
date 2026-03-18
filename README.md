@@ -192,9 +192,21 @@ If the license is declined, a `LicenseException` is thrown.
 
 ---
 
-## SSL
+## HTTP and SSL
 
-By default, full SSL certificate and hostname verification is performed. For test environments with self-hosted Movebank instances you can disable this:
+Both `http://` and `https://` base URLs are supported. The live Movebank API requires HTTPS; plain HTTP is useful when pointing the client at a local mirror such as [mullet-server](https://github.com/mcb77/mullet-server).
+
+```java
+// Live Movebank (HTTPS)
+MulletRestClient client = new MulletRestClient(
+    "https://www.movebank.org/movebank", user, password, licenseChecker);
+
+// Local mirror (plain HTTP)
+MulletRestClient client = new MulletRestClient(
+    "http://localhost:8080/movebank", user, password, licenseChecker);
+```
+
+For test environments with self-signed certificates, SSL verification can be disabled:
 
 ```java
 client.disableSslChecks();  // never use in production

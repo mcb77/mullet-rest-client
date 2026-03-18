@@ -7,6 +7,7 @@ import com.opencsv.CSVReaderBuilder;
 import java.awt.Frame;
 import java.io.*;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
@@ -86,10 +87,10 @@ public class MulletRestClient {
 
 		if (licenseMd5 != null)
 			requestParameters.put("license-md5", licenseMd5);
-		HttpsURLConnection conn = (HttpsURLConnection) new URL(getDirectReadBaseUrl()
+		HttpURLConnection conn = (HttpURLConnection) new URL(getDirectReadBaseUrl()
 				+ getQueryString(requestParameters)).openConnection();
-		if (disableSslChecks)
-			HttpsUtil.disableChecks(conn);
+		if (conn instanceof HttpsURLConnection && disableSslChecks)
+			HttpsUtil.disableChecks((HttpsURLConnection) conn);
 		conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
 		conn.setRequestProperty("user", user);
 		conn.setRequestProperty("password", password);
